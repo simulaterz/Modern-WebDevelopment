@@ -1111,10 +1111,16 @@ a {
   padding: 10px 0;
   position: absolute;
   width: 100%;
-  z-index: 2;
+  z-index: 2; /* cuz after element must set on top */
+  -webkit-transition: background-color .3s ease-out;
+  transition: background-color .3s ease-out;
 }
 
-/* cuz after element must set on top */
+/* for bg in is-expanded*/
+
+.site-header--is-expanded {
+  background-color: rgba(47,85,114, 0.55);
+}
 
 @media (min-width: 800px) {
 
@@ -1123,8 +1129,11 @@ a {
   }
 }
 
-.site-header__btn-container {
-  float: right;
+@media (min-width: 800px) {
+
+  .site-header__btn-container {
+    float: right;
+  }
 }
 
 .site-header__logo {
@@ -1157,6 +1166,7 @@ a {
   height: 20px;
   background-color: #fff;
   position: absolute;
+  z-index: 10;
   top: 10px;
   right: 10px;
 }
@@ -1169,22 +1179,51 @@ a {
 }
 
 .site-header__menu-content {
-  display: none;
+  opacity: 0;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  position: relative;/* for z-index */
+  z-index: -10;
+  padding-top: 90px;
+  text-align: center;
 }
 
 @media (min-width: 800px) {
 
   .site-header__menu-content {
-    display: block;
+    opacity: 1;
+    z-index: 1;
+    padding-top: 0;
+    -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
 
 .site-header__menu-content--is-visible {
-  display: block;
+  opacity: 1;
+  z-index: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
-.primary-nav--pull-right {
-  float: right;
+.primary-nav {
+  padding-top: 10px;
+}
+
+@media (min-width: 800px) {
+
+  .primary-nav {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 800px) {
+
+  .primary-nav--pull-right {
+    float: right;
+  }
 }
 
 .primary-nav ul {
@@ -1200,14 +1239,45 @@ a {
 
 .primary-nav li {
   list-style: none;
-  float: left;
-  padding-right: 20px;
+  display: inline-block;/* for centered li */
+  padding-right: 7px;
+}
+
+@media (min-width: 800px) {
+
+  .primary-nav li {
+    float: left;
+    display: block;
+    padding-right: 20px;
+  }
+}
+
+.primary-nav li:last-child {
+  padding-right: 0;
+}
+
+@media (min-width: 800px) {
+
+  .primary-nav li:last-child {
+    padding-right: 20px;
+  }
 }
 
 .primary-nav a {
   color: #fff;
   text-decoration: none;
   font-weight: 300;
-  display: block;
-  padding: 12px 0;
+  display: inline-block;
+  padding: 5px 8px;
+  font-size: .8rem;
+  background-color: rgba(47,85,114, 0.5);
+}
+
+@media (min-width: 800px) {
+
+  .primary-nav a {
+    font-size: 1rem;
+    padding: 12px 0;
+    background-color: transparent;
+  }
 }
